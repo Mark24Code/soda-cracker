@@ -12,11 +12,11 @@ subfix = ".docx"
 if len(sys_argv)==2 and sys_argv[1]=='--help':
     help_doc = """
     python3 file_generator.py  <参数配置>
-    
+
     用于生成工作日范围的文件
-    
+
     文件名组成： [前缀]日期格式(%Y%m%d)[后缀]
-    
+
     --source    <模板文件> 模板文件文件名
     --forward   <周期数> 向后的周期个数
     --start     <开始日期> 格式(%Y%m%d),例如:20171212
@@ -54,7 +54,7 @@ source_file_path = os.path.join(cwd, source_file)
 # interval distances
 start_date = datetime.today()
 if start_date_str:
-    start_date = time.strptime(start_date_str, '%Y%m%d')
+    start_date = datetime.strptime(start_date_str, '%Y%m%d')
 start_week = start_date.weekday()
 
 
@@ -64,7 +64,7 @@ for cycle in range(forward + 1):
         distances.append(cycle * 7 + i)
 
 slice_index = distances.index(start_week)
-rest_distances = distances[slice_index - 1:]
+rest_distances = distances[slice_index:]
 
 # date generators
 for day_distance in rest_distances:
